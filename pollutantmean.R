@@ -24,37 +24,39 @@ pollutantmean <- function ( directory,
 
     fileList <- list.files ( directory )
     
-    ## 'id' is an integer vector indicating the monitor ID numbers
-    ## to be used
+    # Saving the original working directoy before setting the 
+    # the working directory to the CSV file folder.
     
-    wd1 <- getwd()
+    wd1 <- getwd ()
+    
     setwd ( directory )
+    
+    # Iterating over the id vector to read in the specified file data.
     
     for ( i in id ) {
         
         data <- read.csv ( fileList [i], 
                            header = TRUE )
         
-        ## 'pollutant' is a character vector of length 1 indicating
-        ## the name of the pollutant for which we will calculate the mean;
-        ## either "sulfate" or "nitrate"
+        # 'pollutant' is a character vector of length 1 indicating
+        # the name of the pollutant for which we will calculate the mean;
+        # either "sulfate" or "nitrate".
         
         pollutes <- c ( pollutes, 
                         data [, pollutant] )
     } 
     
-    ## resetting wd back to the original wd for convenience
+    # Resetting back to the prev saved working directory.
     
     setwd ( wd1 )
     
-    ## mean function, removing NA's
+    # Applying mean(), 
+    # and removing NA's
     
     pollutesMean <- mean ( pollutes, 
                            na.rm = TRUE )
     
-    ## Return the mean of the pollutant across all monitors list
-    ## in the 'id' vector (ignoring NA values)
-    ## NOTE: Do not round result!
+    # Returning the mean of the pollutant across the specified monitors.
     
     pollutesMean
   
