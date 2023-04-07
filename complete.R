@@ -9,7 +9,7 @@ complete <- function ( directory, id = 1:332 ) {
     # Saving the original working directory to be reset after reading in the 
     # specdata files. 
     
-    wd1 <- getwd()
+    wd1 <- getwd ()
     
     # A list of files names in the folder containing our files of interest.
     
@@ -44,35 +44,40 @@ complete <- function ( directory, id = 1:332 ) {
     
     lenVect <- 1:lenVar
     
-    ## using complete.cases()
+    # Using complete.cases()
     
     for ( i in lenVect ) {
     
-        # 'complete.cases' creates a dataframe of logical values
-        # if no NAs are detected in the row within the file
-        # in dfList, then it is a complete case, so the value will be TRUE
+        # 'complete.cases' creates a dataframe of logical values.
+        
+        # If no NAs are detected in the row within dfList, 
+        # then it is a complete case, 
+        # and the value will be TRUE
         
         logicalFrame <- complete.cases ( as.data.frame ( dfList [i] ) )
         
-        # The numerical value for TRUE is 1, so summing the number of TRUES
-        # will give us the amount of complete rows in each file. 
+        # The numerical value for TRUE is 1. 
+        
+        # So summing the number of TRUES will give us the amount 
+        # of complete rows in each file. 
         
         sum_of_rows <- append ( sum_of_rows, 
                                 sum ( logicalFrame, 
                                       na.rm = TRUE ) )
 
-        
     }
     
-    # Flattening the list of lists to a simple vector
+    # Flattening the list of lists to a simple vector.
     
     nobs <- unlist ( sum_of_rows )
     
     # Using the two vectors as columns in the new dataframe
     
-    ccFrame <- data.frame ( id, nobs )
+    ccFrame <- data.frame ( id, 
+                            nobs )
     
-    # Return the dataframe
+    # Returns the dataframe
+    
     ccFrame
 
 }
