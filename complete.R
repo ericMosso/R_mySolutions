@@ -1,7 +1,10 @@
+# "Reads a directory full of files and reports the number of 
+# completely observed cases in each data file. 
+
+# The function should return a data frame where the first column is the 
+# name of the file and the second column is the number of complete cases."
+
 complete <- function ( directory, id = 1:332 ) {
-    
-    ## 'directory' is a character vector of length 1  
-    ## indicating the location of the CSV files
     
     # Saving the original working directory to be reset after reading in the 
     # specdata files. 
@@ -25,7 +28,7 @@ complete <- function ( directory, id = 1:332 ) {
     
     # using 'sapply()' because 'fileList' is a character string
     
-    dfList <- lapply ( fileList[id], 
+    dfList <- lapply ( fileList, 
                        read.csv )
     
     # reset the working directory
@@ -34,7 +37,7 @@ complete <- function ( directory, id = 1:332 ) {
     
     # Need to make a length placeholder for the below 'for' loop.
     
-    lenVar <- length(id)
+    lenVar <- length ( id )
     
     # Vector that will hold a vector from 1 to the number of files to be read
     # for complete cases below.
@@ -49,7 +52,7 @@ complete <- function ( directory, id = 1:332 ) {
         # if no NAs are detected in the row within the file
         # in dfList, then it is a complete case, so the value will be TRUE
         
-        logicalFrame <- complete.cases ( as.data.frame ( dfList[i] ) )
+        logicalFrame <- complete.cases ( as.data.frame ( dfList [i] ) )
         
         # The numerical value for TRUE is 1, so summing the number of TRUES
         # will give us the amount of complete rows in each file. 
@@ -57,6 +60,7 @@ complete <- function ( directory, id = 1:332 ) {
         sum_of_rows <- append ( sum_of_rows, 
                                 sum ( logicalFrame, 
                                       na.rm = TRUE ) )
+
         
     }
     
