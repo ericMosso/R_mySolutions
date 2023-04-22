@@ -53,8 +53,8 @@ best <- function ( state, outcome ) {
     # Whichever outcome is chosen, this function can handle it. 
     
     bestfunc <- \ ( dfoutcomes,
-                  state,
-                  outcome ) {
+                    state,
+                    outcome ) {
     
     # Converting the outcome column in the dfoutcomes dataframe
     # to numeric type. This is so the order function further down
@@ -63,7 +63,7 @@ best <- function ( state, outcome ) {
     if ( outcome == 'heart attack' ) {
       
       dfoutcomes [ , 11 ] <- 
-        as.numeric ( as.character( dfoutcomes [ , 11 ] ) )
+          as.numeric ( as.character( dfoutcomes [ , 11 ] ) )
     
       mortality_rate_30d <- dfoutcomes [ , 11 ]
     
@@ -106,8 +106,8 @@ best <- function ( state, outcome ) {
     # and then break mortality rate ties by alphabetization.
     
     orderedBest <- best_hospital_df [ order ( 
-      best_hospital_df$mortality_rate_30d,
-      best_hospital_df$hospital_name ), ]
+        best_hospital_df$mortality_rate_30d,
+        best_hospital_df$hospital_name ), ]
     
     # The assignment only calls for the no. 1 best hospital,
     # so we return only the first row and column (hospital name).
@@ -119,8 +119,8 @@ best <- function ( state, outcome ) {
     # A call to the function above. 
     
     bestfunc ( dfoutcomes, 
-             state, 
-             outcome )
+               state, 
+               outcome )
     
     # These are just my quick references to the CSV file columns' numbers.
       # 11 - heart attack
